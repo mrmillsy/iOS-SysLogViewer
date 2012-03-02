@@ -1,0 +1,296 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		83C8A7631501274A0098A280 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83C8A7621501274A0098A280 /* UIKit.framework */; };
+		83C8A7651501274A0098A280 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83C8A7641501274A0098A280 /* Foundation.framework */; };
+		83C8A7671501274A0098A280 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83C8A7661501274A0098A280 /* CoreGraphics.framework */; };
+		83C8A76D1501274A0098A280 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 83C8A76B1501274A0098A280 /* InfoPlist.strings */; };
+		83C8A76F1501274A0098A280 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 83C8A76E1501274A0098A280 /* main.m */; };
+		83C8A7731501274A0098A280 /* MSAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 83C8A7721501274A0098A280 /* MSAppDelegate.m */; };
+		83C8A7761501274A0098A280 /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 83C8A7741501274A0098A280 /* MainStoryboard_iPhone.storyboard */; };
+		83C8A7791501274A0098A280 /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 83C8A7771501274A0098A280 /* MainStoryboard_iPad.storyboard */; };
+		83C8A77C1501274A0098A280 /* MSViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83C8A77B1501274A0098A280 /* MSViewController.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		83C8A75E1501274A0098A280 /* SysLogViewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SysLogViewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		83C8A7621501274A0098A280 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		83C8A7641501274A0098A280 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		83C8A7661501274A0098A280 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		83C8A76A1501274A0098A280 /* SysLogViewer-Info.plist */ = {isa = PBXFileReference; path = "SysLogViewer-Info.plist"; sourceTree = "<group>"; };
+		83C8A76C1501274A0098A280 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		83C8A76E1501274A0098A280 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		83C8A7701501274A0098A280 /* SysLogViewer-Prefix.pch */ = {isa = PBXFileReference; path = "SysLogViewer-Prefix.pch"; sourceTree = "<group>"; };
+		83C8A7711501274A0098A280 /* MSAppDelegate.h */ = {isa = PBXFileReference; path = MSAppDelegate.h; sourceTree = "<group>"; };
+		83C8A7721501274A0098A280 /* MSAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MSAppDelegate.m; sourceTree = "<group>"; };
+		83C8A7751501274A0098A280 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
+		83C8A7781501274A0098A280 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
+		83C8A77A1501274A0098A280 /* MSViewController.h */ = {isa = PBXFileReference; path = MSViewController.h; sourceTree = "<group>"; };
+		83C8A77B1501274A0098A280 /* MSViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MSViewController.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		83C8A75B1501274A0098A280 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				83C8A7631501274A0098A280 /* UIKit.framework in Frameworks */,
+				83C8A7651501274A0098A280 /* Foundation.framework in Frameworks */,
+				83C8A7671501274A0098A280 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		83C8A753150127490098A280 = {
+			isa = PBXGroup;
+			children = (
+				83C8A7681501274A0098A280 /* SysLogViewer */,
+				83C8A7611501274A0098A280 /* Frameworks */,
+				83C8A75F1501274A0098A280 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		83C8A75F1501274A0098A280 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				83C8A75E1501274A0098A280 /* SysLogViewer.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		83C8A7611501274A0098A280 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				83C8A7621501274A0098A280 /* UIKit.framework */,
+				83C8A7641501274A0098A280 /* Foundation.framework */,
+				83C8A7661501274A0098A280 /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		83C8A7681501274A0098A280 /* SysLogViewer */ = {
+			isa = PBXGroup;
+			children = (
+				83C8A7711501274A0098A280 /* MSAppDelegate.h */,
+				83C8A7721501274A0098A280 /* MSAppDelegate.m */,
+				83C8A7741501274A0098A280 /* MainStoryboard_iPhone.storyboard */,
+				83C8A7771501274A0098A280 /* MainStoryboard_iPad.storyboard */,
+				83C8A77A1501274A0098A280 /* MSViewController.h */,
+				83C8A77B1501274A0098A280 /* MSViewController.m */,
+				83C8A7691501274A0098A280 /* Supporting Files */,
+			);
+			path = SysLogViewer;
+			sourceTree = "<group>";
+		};
+		83C8A7691501274A0098A280 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				83C8A76A1501274A0098A280 /* SysLogViewer-Info.plist */,
+				83C8A76B1501274A0098A280 /* InfoPlist.strings */,
+				83C8A76E1501274A0098A280 /* main.m */,
+				83C8A7701501274A0098A280 /* SysLogViewer-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		83C8A75D1501274A0098A280 /* SysLogViewer */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 83C8A77F1501274A0098A280 /* Build configuration list for PBXNativeTarget "SysLogViewer" */;
+			buildPhases = (
+				83C8A75A1501274A0098A280 /* Sources */,
+				83C8A75B1501274A0098A280 /* Frameworks */,
+				83C8A75C1501274A0098A280 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SysLogViewer;
+			productName = SysLogViewer;
+			productReference = 83C8A75E1501274A0098A280 /* SysLogViewer.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		83C8A755150127490098A280 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0420;
+				ORGANIZATIONNAME = MillsySoft;
+			};
+			buildConfigurationList = 83C8A758150127490098A280 /* Build configuration list for PBXProject "SysLogViewer" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 83C8A753150127490098A280;
+			productRefGroup = 83C8A75F1501274A0098A280 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				83C8A75D1501274A0098A280 /* SysLogViewer */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		83C8A75C1501274A0098A280 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				83C8A76D1501274A0098A280 /* InfoPlist.strings in Resources */,
+				83C8A7761501274A0098A280 /* MainStoryboard_iPhone.storyboard in Resources */,
+				83C8A7791501274A0098A280 /* MainStoryboard_iPad.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		83C8A75A1501274A0098A280 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				83C8A76F1501274A0098A280 /* main.m in Sources */,
+				83C8A7731501274A0098A280 /* MSAppDelegate.m in Sources */,
+				83C8A77C1501274A0098A280 /* MSViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		83C8A76B1501274A0098A280 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				83C8A76C1501274A0098A280 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		83C8A7741501274A0098A280 /* MainStoryboard_iPhone.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				83C8A7751501274A0098A280 /* en */,
+			);
+			name = MainStoryboard_iPhone.storyboard;
+			sourceTree = "<group>";
+		};
+		83C8A7771501274A0098A280 /* MainStoryboard_iPad.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				83C8A7781501274A0098A280 /* en */,
+			);
+			name = MainStoryboard_iPad.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		83C8A77D1501274A0098A280 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		83C8A77E1501274A0098A280 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		83C8A7801501274A0098A280 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SysLogViewer/SysLogViewer-Prefix.pch";
+				INFOPLIST_FILE = "SysLogViewer/SysLogViewer-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		83C8A7811501274A0098A280 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SysLogViewer/SysLogViewer-Prefix.pch";
+				INFOPLIST_FILE = "SysLogViewer/SysLogViewer-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		83C8A758150127490098A280 /* Build configuration list for PBXProject "SysLogViewer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				83C8A77D1501274A0098A280 /* Debug */,
+				83C8A77E1501274A0098A280 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		83C8A77F1501274A0098A280 /* Build configuration list for PBXNativeTarget "SysLogViewer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				83C8A7801501274A0098A280 /* Debug */,
+				83C8A7811501274A0098A280 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 83C8A755150127490098A280 /* Project object */;
+}
