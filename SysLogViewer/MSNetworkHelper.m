@@ -44,7 +44,7 @@
 		  fromHost:(NSString *)host
 			  port:(UInt16)port
 {   
-    MSSysLogEntry* result;
+    MSSysLogEntry* result = nil;
     
     UInt8 *bytes = (UInt8 *)data.bytes;
     
@@ -59,9 +59,8 @@
                 //found a > character
                 UInt8* priorityChar[position-1];
                 memcpy(priorityChar, bytes+1, (position-1));
-                NSString* t = [[NSString alloc]initWithBytes:priorityChar length:(position-1) encoding:NSASCIIStringEncoding];
+                NSString* t = [[[NSString alloc]initWithBytes:priorityChar length:(position-1) encoding:NSASCIIStringEncoding]autorelease];
                 priority = [t intValue];
-                
                 position++;
                 break;
             }
@@ -73,7 +72,7 @@
         UInt8* timestampBytes[15];
         memcpy(timestampBytes, bytes + position, 15);
         
-        NSString* timestamp = [[NSString alloc]initWithBytes:timestampBytes length:15 encoding:NSASCIIStringEncoding];
+        NSString* timestamp = [[[NSString alloc]initWithBytes:timestampBytes length:15 encoding:NSASCIIStringEncoding]autorelease];
         
         position += 15;
         
@@ -86,10 +85,12 @@
             current = bytes[position + lengthOfName];
         }
         
-        UInt8* nameChars[lengthOfName];
-        memcpy(nameChars, bytes+position, lengthOfName);
-        NSString* nameOrIPAddr = [[NSString alloc]initWithBytes:nameChars length:lengthOfName encoding:NSASCIIStringEncoding];
-        
+        NSString* nameOrIPAddr = nil;
+        if(lengthOfName>0){
+            UInt8* nameChars[lengthOfName];
+            memcpy(nameChars, bytes+position, lengthOfName);
+            nameOrIPAddr = [[[NSString alloc]initWithBytes:nameChars length:lengthOfName encoding:NSASCIIStringEncoding]autorelease];
+        }
         position += lengthOfName +1;//+1 for the whitespace at the end before the msg
         
         int tagEnd = position;
@@ -110,7 +111,7 @@
         
         UInt8* tagChar[position + tagEnd];
         memcpy(tagChar, bytes+position, tagEnd-position);        
-        NSString* tag = [[NSString alloc]initWithBytes:tagChar length:tagEnd-position encoding:NSASCIIStringEncoding];
+        NSString* tag = [[[NSString alloc]initWithBytes:tagChar length:tagEnd-position encoding:NSASCIIStringEncoding]autorelease];
         
         position = tagEnd;
         
@@ -126,9 +127,11 @@
         if(pidEnd > position){
             int s = position + 1;
             int e = pidEnd;
-            UInt8* pidChar[e-s];
-            memcpy(pidChar, bytes+s, e-s);        
-            pid = [[NSString alloc] initWithBytes:pidChar length:e-s encoding:NSASCIIStringEncoding];
+            if(e-s > 0){
+                UInt8* pidChar[e-s];
+                memcpy(pidChar, bytes+s, e-s);        
+                pid = [[[NSString alloc] initWithBytes:pidChar length:e-s encoding:NSASCIIStringEncoding]autorelease];
+            }
             
             position = pidEnd + 1;
             
@@ -145,10 +148,10 @@
         
         UInt8* msgChar[data.length - position];
         memcpy(msgChar, bytes+position, data.length - position);        
-        NSString* msg = [[NSString alloc]initWithBytes:msgChar length:data.length - position encoding:NSASCIIStringEncoding];
+        NSString* msg = [[[NSString alloc]initWithBytes:msgChar length:data.length - position encoding:NSASCIIStringEncoding]autorelease];
         
         
-        result = [[MSSysLogEntry alloc]init];
+        result = [[[MSSysLogEntry alloc]init]autorelease];
         result.priority = priority;
         result.severity = severity;
         result.facility = facility;
@@ -159,7 +162,7 @@
         result.msg = msg;
         result.host = host;
         result.port = port;
-        result.rawData = data;
+        result.rawData = data;        
     }
     
     return result;

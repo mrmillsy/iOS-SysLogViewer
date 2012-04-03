@@ -35,7 +35,7 @@ static UInt16 defaultPort = 5122;
     self = [super init];
     if(self){
         self.port = port;
-        self.logEntries = [[NSMutableArray alloc]init];
+        self.logEntries = [[[NSMutableArray alloc]init]autorelease];
     }
     
     return self;
@@ -44,14 +44,10 @@ static UInt16 defaultPort = 5122;
 -(BOOL)startListening
 {
     NSLog(@"Creating UDP socket");
-    self.UdpSocket1 = [[AsyncUdpSocket alloc] initWithDelegate:self];
+    self.UdpSocket1 = [[[AsyncUdpSocket alloc] initWithDelegate:self]autorelease];
     if (![self.UdpSocket1 bindToPort:self.port error:nil])
     {
         NSLog(@"Bind error");
-        if(self.UdpSocket1)
-        {
-            [self.UdpSocket1 release];
-        }
         return NO;
     }
     [self.UdpSocket1 receiveWithTimeout:-1 tag:1];
@@ -78,13 +74,19 @@ static UInt16 defaultPort = 5122;
         //NSLog(@"Msg %@", syslog);
                 
         [self.logEntries addObject:syslog];
-        [syslog release];
 
         [[NSNotificationCenter defaultCenter]postNotificationName:@"SysLogMessage" object:self];
     }
     
 	[self.UdpSocket1 receiveWithTimeout:-1 tag:1];			//Setup to receive next UDP packet
 	return YES;			//Signal that we didn't ignore the packet.
+}
+
+-(void)dealloc
+{
+    [_UdpSocket1 release];
+    [_logEntries release];
+    [super dealloc];
 }
 
 @end

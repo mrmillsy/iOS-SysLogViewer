@@ -49,7 +49,7 @@
         [userDefaults synchronize];
     }
 	// Do any additional setup after loading the view, typically from a nib.
-    self.logReceiver = [[MSSysLogReceiver alloc]initWithPort:portNumber];
+    self.logReceiver = [[[MSSysLogReceiver alloc]initWithPort:portNumber]autorelease];
     self.autoScrollSwitch.on = [userDefaults boolForKey:@"autoScrollDefault"];
     
     [self startWithPort:portNumber];
@@ -126,7 +126,6 @@
         //close the old one
         if(self.logReceiver){
             [self.logReceiver stopListening];
-            [self.logReceiver release];
         }   
         
         //start listening    
@@ -142,7 +141,7 @@
     
     if (cell == nil)
     {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
+        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier]autorelease];
     }
     
     MSSysLogEntry* entry = [self.logReceiver.logEntries objectAtIndex:indexPath.row];
@@ -193,7 +192,7 @@
 -(void)startWithPort:(int)portNumber
 {
     //restart the listener    
-    self.logReceiver = [[MSSysLogReceiver alloc]initWithPort:portNumber];
+    self.logReceiver = [[[MSSysLogReceiver alloc]initWithPort:portNumber]autorelease];
     
     //register for notifications again
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(newMessage) name:@"SysLogMessage" object:self.logReceiver];
@@ -201,7 +200,7 @@
     BOOL started = [self.logReceiver startListening];
     if(!started){
         //show Alert to user
-        UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Error" message:@"Could not bind to port - check Wifi connection" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        UIAlertView* alert = [[[UIAlertView alloc]initWithTitle:@"Error" message:@"Could not bind to port - check Wifi connection" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil] autorelease];
         [alert show];
     }
 }
@@ -214,9 +213,9 @@
 
 
 - (void)dealloc {
-    [self.logReceiver stopListening];
     [[NSNotificationCenter defaultCenter]removeObserver:self];
-
+    [_logReceiver stopListening];    
+    [_logReceiver release];
     [_syslogTableView release];
     [_autoScrollSwitch release];
     [_autoScrollSwitch release];
