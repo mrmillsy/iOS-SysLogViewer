@@ -17,6 +17,7 @@
 @synthesize portCounter;
 @synthesize portLabel;
 @synthesize ipLabel;
+@synthesize autoScrollSwitch;
 @synthesize delegate = _delegate;
 
 - (id)initWithStyle:(UITableViewStyle)style
@@ -55,6 +56,7 @@
     [self setPortCounter:nil];
     [self setPortLabel:nil];
     [self setIpLabel:nil];
+    [self setAutoScrollSwitch:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -69,6 +71,7 @@
 {
     //update the delegate when we're done
     [self.delegate updatePortNumber:self.portCounter.value];
+    [self.delegate updateScroll:self.autoScrollSwitch.on];
 }
 
 - (IBAction)portNumberValueChanged:(id)sender {
@@ -80,6 +83,7 @@
     [portCounter release];
     [portLabel release];
     [ipLabel release];
+    [autoScrollSwitch release];
     [super dealloc];
 }
 @end

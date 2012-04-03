@@ -64,16 +64,6 @@
     // e.g. self.myOutlet = nil;
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-}
-
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-}
-
 - (void)viewWillDisappear:(BOOL)animated
 {
 	[super viewWillDisappear:animated];
@@ -106,23 +96,35 @@
     }
 }
 
+-(void)updateScroll:(BOOL)scroll
+{
+    //only update if the autoscroll value has changed
+    if(self.autoScrollSwitch.on != scroll){
+        self.autoScrollSwitch.on = scroll;
+        [self autoScrollChanged:nil];
+    }
+}
+
 -(void)updatePortNumber:(int)portNumber{
-    //save the default port number
-    NSUserDefaults* userDefaults = [NSUserDefaults standardUserDefaults];    
-    [userDefaults setInteger:portNumber forKey:@"defaultPortNumber"];
-    [userDefaults synchronize];
-    
-    //stop receiving notifications
-    [[NSNotificationCenter defaultCenter]removeObserver:self];
-    
-    //close the old one
-    if(self.logReceiver){
-        [self.logReceiver stopListening];
-        [self.logReceiver release];
-    }   
-    
-    //start listening    
-    [self startWithPort:portNumber];
+    //only update if the port number has changed
+    if(portNumber != self.logReceiver.port){
+        //save the default port number
+        NSUserDefaults* userDefaults = [NSUserDefaults standardUserDefaults];    
+        [userDefaults setInteger:portNumber forKey:@"defaultPortNumber"];
+        [userDefaults synchronize];
+        
+        //stop receiving notifications
+        [[NSNotificationCenter defaultCenter]removeObserver:self];
+        
+        //close the old one
+        if(self.logReceiver){
+            [self.logReceiver stopListening];
+            [self.logReceiver release];
+        }   
+        
+        //start listening    
+        [self startWithPort:portNumber];
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -172,6 +174,7 @@
     if([[segue identifier]isEqualToString:@"showSettings"]){
         MSSettingsTableViewController* dest = [segue destinationViewController];
         dest.portCounter.value = self.logReceiver.port;
+        dest.autoScrollSwitch.on = self.autoScrollSwitch.on;
         dest.delegate = self;
     }
 }
