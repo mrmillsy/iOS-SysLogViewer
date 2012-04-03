@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8373C9C8152AE52D00988ADC /* MSSysLogReceiver.m in Sources */ = {isa = PBXBuildFile; fileRef = 8373C9C7152AE52D00988ADC /* MSSysLogReceiver.m */; };
+		8373C9CB152AE61300988ADC /* MSNetworkHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 8373C9CA152AE61300988ADC /* MSNetworkHelper.m */; };
+		8385B9E9152AFAD300155871 /* MSSysLogEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 8385B9E8152AFAD300155871 /* MSSysLogEntry.m */; };
+		8385B9ED152B148400155871 /* red.png in Resources */ = {isa = PBXBuildFile; fileRef = 8385B9EC152B148400155871 /* red.png */; };
+		8385B9F0152B16E500155871 /* black.png in Resources */ = {isa = PBXBuildFile; fileRef = 8385B9EE152B16E500155871 /* black.png */; };
+		8385B9F1152B16E500155871 /* orange.png in Resources */ = {isa = PBXBuildFile; fileRef = 8385B9EF152B16E500155871 /* orange.png */; };
 		83C8A7631501274A0098A280 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83C8A7621501274A0098A280 /* UIKit.framework */; };
 		83C8A7651501274A0098A280 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83C8A7641501274A0098A280 /* Foundation.framework */; };
 		83C8A7671501274A0098A280 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83C8A7661501274A0098A280 /* CoreGraphics.framework */; };
@@ -16,23 +22,37 @@
 		83C8A7761501274A0098A280 /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 83C8A7741501274A0098A280 /* MainStoryboard_iPhone.storyboard */; };
 		83C8A7791501274A0098A280 /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 83C8A7771501274A0098A280 /* MainStoryboard_iPad.storyboard */; };
 		83C8A77C1501274A0098A280 /* MSViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83C8A77B1501274A0098A280 /* MSViewController.m */; };
+		83C8A783150127B80098A280 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83C8A782150127B80098A280 /* CFNetwork.framework */; };
+		83C8A7861501282C0098A280 /* AsyncUdpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 83C8A7851501282C0098A280 /* AsyncUdpSocket.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8373C9C6152AE52D00988ADC /* MSSysLogReceiver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSSysLogReceiver.h; sourceTree = "<group>"; };
+		8373C9C7152AE52D00988ADC /* MSSysLogReceiver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSSysLogReceiver.m; sourceTree = "<group>"; };
+		8373C9C9152AE61300988ADC /* MSNetworkHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSNetworkHelper.h; sourceTree = "<group>"; };
+		8373C9CA152AE61300988ADC /* MSNetworkHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSNetworkHelper.m; sourceTree = "<group>"; };
+		8385B9E7152AFAD300155871 /* MSSysLogEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSSysLogEntry.h; sourceTree = "<group>"; };
+		8385B9E8152AFAD300155871 /* MSSysLogEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSSysLogEntry.m; sourceTree = "<group>"; };
+		8385B9EC152B148400155871 /* red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = red.png; sourceTree = "<group>"; };
+		8385B9EE152B16E500155871 /* black.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = black.png; sourceTree = "<group>"; };
+		8385B9EF152B16E500155871 /* orange.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = orange.png; sourceTree = "<group>"; };
 		83C8A75E1501274A0098A280 /* SysLogViewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SysLogViewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		83C8A7621501274A0098A280 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		83C8A7641501274A0098A280 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		83C8A7661501274A0098A280 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		83C8A76A1501274A0098A280 /* SysLogViewer-Info.plist */ = {isa = PBXFileReference; path = "SysLogViewer-Info.plist"; sourceTree = "<group>"; };
+		83C8A76A1501274A0098A280 /* SysLogViewer-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SysLogViewer-Info.plist"; sourceTree = "<group>"; };
 		83C8A76C1501274A0098A280 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		83C8A76E1501274A0098A280 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		83C8A7701501274A0098A280 /* SysLogViewer-Prefix.pch */ = {isa = PBXFileReference; path = "SysLogViewer-Prefix.pch"; sourceTree = "<group>"; };
-		83C8A7711501274A0098A280 /* MSAppDelegate.h */ = {isa = PBXFileReference; path = MSAppDelegate.h; sourceTree = "<group>"; };
+		83C8A7701501274A0098A280 /* SysLogViewer-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SysLogViewer-Prefix.pch"; sourceTree = "<group>"; };
+		83C8A7711501274A0098A280 /* MSAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MSAppDelegate.h; sourceTree = "<group>"; };
 		83C8A7721501274A0098A280 /* MSAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MSAppDelegate.m; sourceTree = "<group>"; };
 		83C8A7751501274A0098A280 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
 		83C8A7781501274A0098A280 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
-		83C8A77A1501274A0098A280 /* MSViewController.h */ = {isa = PBXFileReference; path = MSViewController.h; sourceTree = "<group>"; };
+		83C8A77A1501274A0098A280 /* MSViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MSViewController.h; sourceTree = "<group>"; };
 		83C8A77B1501274A0098A280 /* MSViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MSViewController.m; sourceTree = "<group>"; };
+		83C8A782150127B80098A280 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		83C8A7841501282C0098A280 /* AsyncUdpSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AsyncUdpSocket.h; sourceTree = "<group>"; };
+		83C8A7851501282C0098A280 /* AsyncUdpSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AsyncUdpSocket.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -40,6 +60,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				83C8A783150127B80098A280 /* CFNetwork.framework in Frameworks */,
 				83C8A7631501274A0098A280 /* UIKit.framework in Frameworks */,
 				83C8A7651501274A0098A280 /* Foundation.framework in Frameworks */,
 				83C8A7671501274A0098A280 /* CoreGraphics.framework in Frameworks */,
@@ -49,6 +70,29 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8373C9C5152AE50400988ADC /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				8373C9C6152AE52D00988ADC /* MSSysLogReceiver.h */,
+				8373C9C7152AE52D00988ADC /* MSSysLogReceiver.m */,
+				8373C9C9152AE61300988ADC /* MSNetworkHelper.h */,
+				8373C9CA152AE61300988ADC /* MSNetworkHelper.m */,
+				8385B9E7152AFAD300155871 /* MSSysLogEntry.h */,
+				8385B9E8152AFAD300155871 /* MSSysLogEntry.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		8385B9EB152B148400155871 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				8385B9EE152B16E500155871 /* black.png */,
+				8385B9EF152B16E500155871 /* orange.png */,
+				8385B9EC152B148400155871 /* red.png */,
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
 		83C8A753150127490098A280 = {
 			isa = PBXGroup;
 			children = (
@@ -69,6 +113,7 @@
 		83C8A7611501274A0098A280 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				83C8A782150127B80098A280 /* CFNetwork.framework */,
 				83C8A7621501274A0098A280 /* UIKit.framework */,
 				83C8A7641501274A0098A280 /* Foundation.framework */,
 				83C8A7661501274A0098A280 /* CoreGraphics.framework */,
@@ -79,6 +124,9 @@
 		83C8A7681501274A0098A280 /* SysLogViewer */ = {
 			isa = PBXGroup;
 			children = (
+				8385B9EB152B148400155871 /* Images */,
+				8373C9C5152AE50400988ADC /* Model */,
+				83C8A787150128310098A280 /* UDP */,
 				83C8A7711501274A0098A280 /* MSAppDelegate.h */,
 				83C8A7721501274A0098A280 /* MSAppDelegate.m */,
 				83C8A7741501274A0098A280 /* MainStoryboard_iPhone.storyboard */,
@@ -99,6 +147,15 @@
 				83C8A7701501274A0098A280 /* SysLogViewer-Prefix.pch */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		83C8A787150128310098A280 /* UDP */ = {
+			isa = PBXGroup;
+			children = (
+				83C8A7841501282C0098A280 /* AsyncUdpSocket.h */,
+				83C8A7851501282C0098A280 /* AsyncUdpSocket.m */,
+			);
+			name = UDP;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -155,6 +212,9 @@
 				83C8A76D1501274A0098A280 /* InfoPlist.strings in Resources */,
 				83C8A7761501274A0098A280 /* MainStoryboard_iPhone.storyboard in Resources */,
 				83C8A7791501274A0098A280 /* MainStoryboard_iPad.storyboard in Resources */,
+				8385B9ED152B148400155871 /* red.png in Resources */,
+				8385B9F0152B16E500155871 /* black.png in Resources */,
+				8385B9F1152B16E500155871 /* orange.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -168,6 +228,10 @@
 				83C8A76F1501274A0098A280 /* main.m in Sources */,
 				83C8A7731501274A0098A280 /* MSAppDelegate.m in Sources */,
 				83C8A77C1501274A0098A280 /* MSViewController.m in Sources */,
+				83C8A7861501282C0098A280 /* AsyncUdpSocket.m in Sources */,
+				8373C9C8152AE52D00988ADC /* MSSysLogReceiver.m in Sources */,
+				8373C9CB152AE61300988ADC /* MSNetworkHelper.m in Sources */,
+				8385B9E9152AFAD300155871 /* MSSysLogEntry.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -251,6 +315,7 @@
 		83C8A7801501274A0098A280 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SysLogViewer/SysLogViewer-Prefix.pch";
 				INFOPLIST_FILE = "SysLogViewer/SysLogViewer-Info.plist";
@@ -262,6 +327,7 @@
 		83C8A7811501274A0098A280 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SysLogViewer/SysLogViewer-Prefix.pch";
 				INFOPLIST_FILE = "SysLogViewer/SysLogViewer-Info.plist";
@@ -289,6 +355,7 @@
 				83C8A7811501274A0098A280 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
