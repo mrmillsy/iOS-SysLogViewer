@@ -9,6 +9,7 @@
 #import "MSViewController.h"
 #import "MSSysLogReceiver.h"
 #import "MSSysLogEntry.h"
+#import "MSSyslogEntryViewController.h"
 
 @interface MSViewController()
 
@@ -56,6 +57,9 @@
 
 - (void)viewDidUnload
 {
+    [self.logReceiver stopListening];
+    [[NSNotificationCenter defaultCenter]removeObserver:self];
+
     [self setSyslogTableView:nil];
     [self setAutoScrollSwitch:nil];
     [self setAutoScrollSwitch:nil];
@@ -67,8 +71,6 @@
 - (void)viewWillDisappear:(BOOL)animated
 {
 	[super viewWillDisappear:animated];
-    [self.logReceiver stopListening];
-    [[NSNotificationCenter defaultCenter]removeObserver:self];
 }
 
 - (void)viewDidDisappear:(BOOL)animated
@@ -103,6 +105,11 @@
         self.autoScrollSwitch.on = scroll;
         [self autoScrollChanged:nil];
     }
+}
+
+- (IBAction)clearRecords:(id)sender {
+    [self.logReceiver.logEntries removeAllObjects];
+    [self.syslogTableView reloadData];
 }
 
 -(void)updatePortNumber:(int)portNumber{
@@ -176,6 +183,10 @@
         dest.portCounter.value = self.logReceiver.port;
         dest.autoScrollSwitch.on = self.autoScrollSwitch.on;
         dest.delegate = self;
+    }else if([[segue identifier]isEqualToString:@"showEntry"]){
+        MSSyslogEntryViewController* dest = [segue destinationViewController];
+        dest.entry = [self.logReceiver.logEntries objectAtIndex:[self.syslogTableView indexPathForSelectedRow].row];
+        [self.syslogTableView deselectRowAtIndexPath:[self.syslogTableView indexPathForSelectedRow] animated:NO];
     }
 }
 
@@ -200,7 +211,12 @@
     
 }
 
+
+
 - (void)dealloc {
+    [self.logReceiver stopListening];
+    [[NSNotificationCenter defaultCenter]removeObserver:self];
+
     [_syslogTableView release];
     [_autoScrollSwitch release];
     [_autoScrollSwitch release];
