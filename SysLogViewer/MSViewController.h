@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MSSettingsTableViewController.h"
 
-@interface MSViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+@interface MSViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, MSSettingsTableViewControllerDataSource, UIAlertViewDelegate>
 @property (retain, nonatomic) IBOutlet UITableView *syslogTableView;
 @property (retain, nonatomic) IBOutlet UISwitch *autoScrollSwitch;
 

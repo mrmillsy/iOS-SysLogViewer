@@ -39,16 +39,19 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
-    self.logReceiver = [[MSSysLogReceiver alloc]init];
     
     NSUserDefaults* userDefaults = [NSUserDefaults standardUserDefaults];    
+    int portNumber = [userDefaults integerForKey:@"defaultPortNumber"];
+    if(portNumber == 0){
+        portNumber = 5122;
+        [userDefaults setInteger:portNumber forKey:@"defaultPortNumber"];
+        [userDefaults synchronize];
+    }
+	// Do any additional setup after loading the view, typically from a nib.
+    self.logReceiver = [[MSSysLogReceiver alloc]initWithPort:portNumber];
     self.autoScrollSwitch.on = [userDefaults boolForKey:@"autoScrollDefault"];
     
-    //register for updates
-    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(newMessage) name:@"SysLogMessage" object:self.logReceiver];
-    
-    [self.logReceiver startListening];
+    [self startWithPort:portNumber];
 }
 
 - (void)viewDidUnload
@@ -103,6 +106,25 @@
     }
 }
 
+-(void)updatePortNumber:(int)portNumber{
+    //save the default port number
+    NSUserDefaults* userDefaults = [NSUserDefaults standardUserDefaults];    
+    [userDefaults setInteger:portNumber forKey:@"defaultPortNumber"];
+    [userDefaults synchronize];
+    
+    //stop receiving notifications
+    [[NSNotificationCenter defaultCenter]removeObserver:self];
+    
+    //close the old one
+    if(self.logReceiver){
+        [self.logReceiver stopListening];
+        [self.logReceiver release];
+    }   
+    
+    //start listening    
+    [self startWithPort:portNumber];
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     //playerCell
@@ -143,6 +165,36 @@
     if(entry.severity <= kWARNING){
         //cell.backgroundColor = [UIColor redColor];
     }    
+}
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if([[segue identifier]isEqualToString:@"showSettings"]){
+        MSSettingsTableViewController* dest = [segue destinationViewController];
+        dest.portCounter.value = self.logReceiver.port;
+        dest.delegate = self;
+    }
+}
+
+-(void)startWithPort:(int)portNumber
+{
+    //restart the listener    
+    self.logReceiver = [[MSSysLogReceiver alloc]initWithPort:portNumber];
+    
+    //register for notifications again
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(newMessage) name:@"SysLogMessage" object:self.logReceiver];
+
+    BOOL started = [self.logReceiver startListening];
+    if(!started){
+        //show Alert to user
+        UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Error" message:@"Could not bind to port - check Wifi connection" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [alert show];
+    }
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    
 }
 
 - (void)dealloc {

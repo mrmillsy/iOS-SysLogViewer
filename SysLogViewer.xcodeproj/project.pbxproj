@@ -13,6 +13,7 @@
 		8385B9ED152B148400155871 /* red.png in Resources */ = {isa = PBXBuildFile; fileRef = 8385B9EC152B148400155871 /* red.png */; };
 		8385B9F0152B16E500155871 /* black.png in Resources */ = {isa = PBXBuildFile; fileRef = 8385B9EE152B16E500155871 /* black.png */; };
 		8385B9F1152B16E500155871 /* orange.png in Resources */ = {isa = PBXBuildFile; fileRef = 8385B9EF152B16E500155871 /* orange.png */; };
+		8385B9F8152B2CCF00155871 /* MSSettingsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8385B9F7152B2CCF00155871 /* MSSettingsTableViewController.m */; };
 		83C8A7631501274A0098A280 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83C8A7621501274A0098A280 /* UIKit.framework */; };
 		83C8A7651501274A0098A280 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83C8A7641501274A0098A280 /* Foundation.framework */; };
 		83C8A7671501274A0098A280 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83C8A7661501274A0098A280 /* CoreGraphics.framework */; };
@@ -36,6 +37,8 @@
 		8385B9EC152B148400155871 /* red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = red.png; sourceTree = "<group>"; };
 		8385B9EE152B16E500155871 /* black.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = black.png; sourceTree = "<group>"; };
 		8385B9EF152B16E500155871 /* orange.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = orange.png; sourceTree = "<group>"; };
+		8385B9F6152B2CCF00155871 /* MSSettingsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSSettingsTableViewController.h; sourceTree = "<group>"; };
+		8385B9F7152B2CCF00155871 /* MSSettingsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSSettingsTableViewController.m; sourceTree = "<group>"; };
 		83C8A75E1501274A0098A280 /* SysLogViewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SysLogViewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		83C8A7621501274A0098A280 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		83C8A7641501274A0098A280 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -93,6 +96,26 @@
 			path = Images;
 			sourceTree = "<group>";
 		};
+		8385B9F4152B2C9B00155871 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				83C8A7741501274A0098A280 /* MainStoryboard_iPhone.storyboard */,
+				83C8A7771501274A0098A280 /* MainStoryboard_iPad.storyboard */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		8385B9F5152B2CA900155871 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				83C8A77A1501274A0098A280 /* MSViewController.h */,
+				83C8A77B1501274A0098A280 /* MSViewController.m */,
+				8385B9F6152B2CCF00155871 /* MSSettingsTableViewController.h */,
+				8385B9F7152B2CCF00155871 /* MSSettingsTableViewController.m */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
 		83C8A753150127490098A280 = {
 			isa = PBXGroup;
 			children = (
@@ -124,15 +147,13 @@
 		83C8A7681501274A0098A280 /* SysLogViewer */ = {
 			isa = PBXGroup;
 			children = (
+				8385B9F5152B2CA900155871 /* Controllers */,
+				8385B9F4152B2C9B00155871 /* Views */,
 				8385B9EB152B148400155871 /* Images */,
 				8373C9C5152AE50400988ADC /* Model */,
 				83C8A787150128310098A280 /* UDP */,
 				83C8A7711501274A0098A280 /* MSAppDelegate.h */,
 				83C8A7721501274A0098A280 /* MSAppDelegate.m */,
-				83C8A7741501274A0098A280 /* MainStoryboard_iPhone.storyboard */,
-				83C8A7771501274A0098A280 /* MainStoryboard_iPad.storyboard */,
-				83C8A77A1501274A0098A280 /* MSViewController.h */,
-				83C8A77B1501274A0098A280 /* MSViewController.m */,
 				83C8A7691501274A0098A280 /* Supporting Files */,
 			);
 			path = SysLogViewer;
@@ -184,7 +205,7 @@
 		83C8A755150127490098A280 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0420;
+				LastUpgradeCheck = 0430;
 				ORGANIZATIONNAME = MillsySoft;
 			};
 			buildConfigurationList = 83C8A758150127490098A280 /* Build configuration list for PBXProject "SysLogViewer" */;
@@ -232,6 +253,7 @@
 				8373C9C8152AE52D00988ADC /* MSSysLogReceiver.m in Sources */,
 				8373C9CB152AE61300988ADC /* MSNetworkHelper.m in Sources */,
 				8385B9E9152AFAD300155871 /* MSSysLogEntry.m in Sources */,
+				8385B9F8152B2CCF00155871 /* MSSettingsTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
