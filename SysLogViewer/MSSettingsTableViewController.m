@@ -9,6 +9,7 @@
 #import "MSSettingsTableViewController.h"
 #import "MSNetworkHelper.h"
 
+
 @interface MSSettingsTableViewController ()
 
 @end
@@ -18,6 +19,8 @@
 @synthesize portLabel;
 @synthesize ipLabel;
 @synthesize autoScrollSwitch;
+@synthesize severityCounter;
+@synthesize severityLabel;
 @synthesize delegate = _delegate;
 
 - (id)initWithStyle:(UITableViewStyle)style
@@ -49,6 +52,11 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     self.portLabel.text = [NSString stringWithFormat:@"%g", self.portCounter.value];
+    
+    MSSysLogEntry* entry = [[MSSysLogEntry alloc]init];
+    entry.severity = self.severityCounter.value;
+    self.severityLabel.text = [entry severityName];
+    [entry release];
 }
 
 - (void)viewDidUnload
@@ -57,6 +65,8 @@
     [self setPortLabel:nil];
     [self setIpLabel:nil];
     [self setAutoScrollSwitch:nil];
+    [self setSeverityCounter:nil];
+    [self setSeverityLabel:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -72,10 +82,19 @@
     //update the delegate when we're done
     [self.delegate updatePortNumber:self.portCounter.value];
     [self.delegate updateScroll:self.autoScrollSwitch.on];
+    [self.delegate updateSeverity:self.severityCounter.value];
 }
 
 - (IBAction)portNumberValueChanged:(id)sender {
     self.portLabel.text = [NSString stringWithFormat:@"%g", self.portCounter.value];
+}
+- (IBAction)severityValueChanged:(id)sender {
+    
+    MSSysLogEntry* entry = [[MSSysLogEntry alloc]init];
+    entry.severity = self.severityCounter.value;
+    self.severityLabel.text = [entry severityName];
+    
+    [entry release];
 }
 
 
@@ -84,6 +103,8 @@
     [portLabel release];
     [ipLabel release];
     [autoScrollSwitch release];
+    [severityCounter release];
+    [severityLabel release];
     [super dealloc];
 }
 @end

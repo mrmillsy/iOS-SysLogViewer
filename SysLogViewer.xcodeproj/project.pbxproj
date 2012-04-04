@@ -15,6 +15,7 @@
 		8385B9F1152B16E500155871 /* orange.png in Resources */ = {isa = PBXBuildFile; fileRef = 8385B9EF152B16E500155871 /* orange.png */; };
 		8385B9F8152B2CCF00155871 /* MSSettingsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8385B9F7152B2CCF00155871 /* MSSettingsTableViewController.m */; };
 		83B7890F152B6AE300623E84 /* MSSyslogEntryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83B7890E152B6AE300623E84 /* MSSyslogEntryViewController.m */; };
+		83B78911152C5FE100623E84 /* Defaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = 83B78910152C5FE100623E84 /* Defaults.plist */; };
 		83C8A7631501274A0098A280 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83C8A7621501274A0098A280 /* UIKit.framework */; };
 		83C8A7651501274A0098A280 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83C8A7641501274A0098A280 /* Foundation.framework */; };
 		83C8A7671501274A0098A280 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83C8A7661501274A0098A280 /* CoreGraphics.framework */; };
@@ -42,6 +43,7 @@
 		8385B9F7152B2CCF00155871 /* MSSettingsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSSettingsTableViewController.m; sourceTree = "<group>"; };
 		83B7890D152B6AE300623E84 /* MSSyslogEntryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSSyslogEntryViewController.h; sourceTree = "<group>"; };
 		83B7890E152B6AE300623E84 /* MSSyslogEntryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSSyslogEntryViewController.m; sourceTree = "<group>"; };
+		83B78910152C5FE100623E84 /* Defaults.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Defaults.plist; sourceTree = "<group>"; };
 		83C8A75E1501274A0098A280 /* SysLogViewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SysLogViewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		83C8A7621501274A0098A280 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		83C8A7641501274A0098A280 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -171,6 +173,7 @@
 				83C8A76B1501274A0098A280 /* InfoPlist.strings */,
 				83C8A76E1501274A0098A280 /* main.m */,
 				83C8A7701501274A0098A280 /* SysLogViewer-Prefix.pch */,
+				83B78910152C5FE100623E84 /* Defaults.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -241,6 +244,7 @@
 				8385B9ED152B148400155871 /* red.png in Resources */,
 				8385B9F0152B16E500155871 /* black.png in Resources */,
 				8385B9F1152B16E500155871 /* orange.png in Resources */,
+				83B78911152C5FE100623E84 /* Defaults.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

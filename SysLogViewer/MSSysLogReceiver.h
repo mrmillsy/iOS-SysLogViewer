@@ -7,11 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "MSSysLogEntry.h"
 
 @interface MSSysLogReceiver : NSObject
 
-@property (strong, nonatomic) NSMutableArray* logEntries;
+@property (strong, nonatomic, readonly) NSArray* logEntries;
 @property (assign, nonatomic) UInt16 port;
+@property (assign, nonatomic) Severity severity;
 
 //init methods
 -(id)init;
@@ -19,5 +21,6 @@
 
 -(BOOL)startListening;
 -(void)stopListening;
+-(void)clearEntries;
 
 @end

@@ -42,17 +42,8 @@
     [super viewDidLoad];
     
     NSUserDefaults* userDefaults = [NSUserDefaults standardUserDefaults];    
-    int portNumber = [userDefaults integerForKey:@"defaultPortNumber"];
-    if(portNumber == 0){
-        portNumber = 5122;
-        [userDefaults setInteger:portNumber forKey:@"defaultPortNumber"];
-        [userDefaults synchronize];
-    }
-	// Do any additional setup after loading the view, typically from a nib.
-    self.logReceiver = [[[MSSysLogReceiver alloc]initWithPort:portNumber]autorelease];
-    self.autoScrollSwitch.on = [userDefaults boolForKey:@"autoScrollDefault"];
     
-    [self startWithPort:portNumber];
+    [self startWithPort:[userDefaults integerForKey:@"defaultPortNumber"]];
 }
 
 - (void)viewDidUnload
@@ -91,10 +82,22 @@
 -(void)newMessage
 {
     [self.syslogTableView reloadData];
-    if(self.autoScrollSwitch.on){
+    if(self.autoScrollSwitch.on && self.logReceiver.logEntries.count > 0){
         //if autoscroll is on then scroll
         NSIndexPath* lastEntry = [NSIndexPath indexPathForRow:[self.logReceiver.logEntries count]-1 inSection:0];
         [self.syslogTableView scrollToRowAtIndexPath:lastEntry atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+    }
+}
+
+-(void)updateSeverity:(Severity)sev
+{
+    if(self.logReceiver.severity != sev){
+        self.logReceiver.severity = sev;
+        NSUserDefaults* userDefaults = [NSUserDefaults standardUserDefaults];
+        [userDefaults setInteger:sev forKey:@"defaultSeverityLevel"];
+        [userDefaults synchronize];
+        //refresh with new filter applied
+        [self.syslogTableView reloadData];
     }
 }
 
@@ -108,7 +111,7 @@
 }
 
 - (IBAction)clearRecords:(id)sender {
-    [self.logReceiver.logEntries removeAllObjects];
+    [self.logReceiver clearEntries];
     [self.syslogTableView reloadData];
 }
 
@@ -181,6 +184,7 @@
         MSSettingsTableViewController* dest = [segue destinationViewController];
         dest.portCounter.value = self.logReceiver.port;
         dest.autoScrollSwitch.on = self.autoScrollSwitch.on;
+        dest.severityCounter.value = self.logReceiver.severity;
         dest.delegate = self;
     }else if([[segue identifier]isEqualToString:@"showEntry"]){
         MSSyslogEntryViewController* dest = [segue destinationViewController];
@@ -191,8 +195,12 @@
 
 -(void)startWithPort:(int)portNumber
 {
+    NSUserDefaults* userDefaults = [NSUserDefaults standardUserDefaults];    
+    
     //restart the listener    
     self.logReceiver = [[[MSSysLogReceiver alloc]initWithPort:portNumber]autorelease];
+    self.logReceiver.severity = [userDefaults integerForKey:@"defaultSeverityLevel"];    
+    self.autoScrollSwitch.on = [userDefaults boolForKey:@"autoScrollDefault"];    
     
     //register for notifications again
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(newMessage) name:@"SysLogMessage" object:self.logReceiver];

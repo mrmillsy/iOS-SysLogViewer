@@ -192,6 +192,43 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
+                            <tableViewSection headerTitle="Filter" id="v0Q-fM-5bf">
+                                <cells>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="FeG-SX-wio">
+                                        <rect key="frame" x="0.0" y="212" width="400" height="46"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="10" y="1" width="380" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Severity" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="evr-gM-ljf">
+                                                    <rect key="frame" x="20" y="11" width="106" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </label>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="vE9-X9-tFU">
+                                                    <rect key="frame" x="261" y="11" width="99" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </label>
+                                                <stepper opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" continuous="NO" autorepeat="NO" maximumValue="7" id="TCM-I3-7nw">
+                                                    <rect key="frame" x="152" y="8" width="94" height="27"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                    <connections>
+                                                        <action selector="portNumberValueChanged:" destination="LGw-Yf-hUK" eventType="valueChanged" id="SAB-7C-RNj"/>
+                                                        <action selector="severityValueChanged:" destination="LGw-Yf-hUK" eventType="valueChanged" id="mf7-1C-L7D"/>
+                                                    </connections>
+                                                </stepper>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
                         </sections>
                         <connections>
                             <outlet property="dataSource" destination="LGw-Yf-hUK" id="CsS-lw-3Vp"/>
@@ -208,6 +245,8 @@
                         <outlet property="ipLabel" destination="o4t-p2-Vya" id="Nqf-9e-hGY"/>
                         <outlet property="portCounter" destination="XHr-Iz-SOu" id="4n6-5B-8V2"/>
                         <outlet property="portLabel" destination="FBC-SM-NvF" id="NNK-tp-7a1"/>
+                        <outlet property="severityCounter" destination="TCM-I3-7nw" id="aXa-nh-RMj"/>
+                        <outlet property="severityLabel" destination="vE9-X9-tFU" id="POI-1L-FpJ"/>
                     </connections>
                 </tableViewController>
             </objects>
@@ -517,6 +556,8 @@
                 <relationship kind="outlet" name="ipLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="portCounter" candidateClass="UIStepper"/>
                 <relationship kind="outlet" name="portLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="severityCounter" candidateClass="UIStepper"/>
+                <relationship kind="outlet" name="severityLabel" candidateClass="UILabel"/>
             </relationships>
         </class>
         <class className="MSSyslogEntryViewController" superclassName="UITableViewController">

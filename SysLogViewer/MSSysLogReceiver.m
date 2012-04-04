@@ -13,6 +13,7 @@
 @interface MSSysLogReceiver()
 
 @property (nonatomic, strong) AsyncUdpSocket *UdpSocket1;
+@property (nonatomic, strong) NSMutableArray* internalLogEntries;
 
 @end
 
@@ -20,6 +21,8 @@
 
 @synthesize logEntries = _logEntries;
 @synthesize port = _port;
+@synthesize severity = _severity;
+@synthesize internalLogEntries = _internalLogEntries;
 
 //private properties
 static UInt16 defaultPort = 5122;
@@ -32,10 +35,16 @@ static UInt16 defaultPort = 5122;
 
 -(id)initWithPort:(UInt16)port
 {
+    return [self initWithPort:port severity:7];//default is Debug i.e. show everything
+}
+
+-(id)initWithPort:(UInt16)port severity:(Severity)severity
+{
     self = [super init];
     if(self){
         self.port = port;
-        self.logEntries = [[[NSMutableArray alloc]init]autorelease];
+        self.internalLogEntries = [[[NSMutableArray alloc]init]autorelease];
+        self.severity = severity;
     }
     
     return self;
@@ -73,13 +82,28 @@ static UInt16 defaultPort = 5122;
         
         //NSLog(@"Msg %@", syslog);
                 
-        [self.logEntries addObject:syslog];
+        [self.internalLogEntries addObject:syslog];
 
         [[NSNotificationCenter defaultCenter]postNotificationName:@"SysLogMessage" object:self];
     }
     
 	[self.UdpSocket1 receiveWithTimeout:-1 tag:1];			//Setup to receive next UDP packet
 	return YES;			//Signal that we didn't ignore the packet.
+}
+
+-(void)clearEntries
+{
+    if(self.internalLogEntries){
+        [self.internalLogEntries removeAllObjects];
+    }
+}
+
+-(NSArray*)logEntries
+{
+    NSPredicate* filterPred = [NSPredicate predicateWithFormat:@"severity <= %u", self.severity];
+    NSMutableArray* copy = [self.internalLogEntries mutableCopy];
+    [copy filterUsingPredicate:filterPred];
+    return copy; 
 }
 
 -(void)dealloc
