@@ -12,3 +12,11 @@
     #import <UIKit/UIKit.h>
     #import <Foundation/Foundation.h>
 #endif
+
+static BOOL isPad() {
+#ifdef UI_USER_INTERFACE_IDIOM
+    return (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad);
+#else
+    return NO;
+#endif
+}

@@ -6,11 +6,14 @@
 //  Copyright (c) 2012 MillsySoft. All rights reserved.
 //
 
+
+
 #import "MSViewController.h"
 #import "MSSysLogReceiver.h"
 #import "MSSysLogEntry.h"
 #import "MSSyslogEntryViewController.h"
 #import "MSNetworkHelper.h"
+#import "MSSettingsTableViewController.h"
 
 @interface MSViewController()
 
@@ -34,9 +37,7 @@
 
 #pragma mark - View lifecycle
 - (IBAction)autoScrollChanged:(id)sender {
-    NSUserDefaults* userDefaults = [NSUserDefaults standardUserDefaults];
-    [userDefaults setBool:self.autoScrollSwitch.on forKey:@"autoScrollDefault"];
-    [userDefaults synchronize];
+    [self updateScroll:self.autoScrollSwitch.on];
 }
 
 - (void)viewDidLoad
@@ -80,20 +81,10 @@
     // e.g. self.myOutlet = nil;
 }
 
-- (void)viewWillDisappear:(BOOL)animated
-{
-	[super viewWillDisappear:animated];
-}
-
-- (void)viewDidDisappear:(BOOL)animated
-{
-	[super viewDidDisappear:animated];
-}
-
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     // Return YES for supported orientations
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+    if (!isPad()) {
         return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
     } else {
         return YES;
@@ -103,7 +94,7 @@
 -(void)newMessage
 {
     [self.syslogTableView reloadData];
-    if(self.autoScrollSwitch.on && self.logReceiver.logEntries.count > 0){
+    if([[NSUserDefaults standardUserDefaults] boolForKey:@"autoScrollDefault"] && self.logReceiver.logEntries.count > 0){
         //if autoscroll is on then scroll
         NSIndexPath* lastEntry = [NSIndexPath indexPathForRow:[self.logReceiver.logEntries count]-1 inSection:0];
         [self.syslogTableView scrollToRowAtIndexPath:lastEntry atScrollPosition:UITableViewScrollPositionBottom animated:YES];
@@ -124,10 +115,13 @@
 
 -(void)updateScroll:(BOOL)scroll
 {
+    NSUserDefaults* userDefaults = [NSUserDefaults standardUserDefaults];
     //only update if the autoscroll value has changed
-    if(self.autoScrollSwitch.on != scroll){
-        self.autoScrollSwitch.on = scroll;
-        [self autoScrollChanged:nil];
+    if([userDefaults boolForKey:@"autoScrollDefault"] != scroll){
+        if(self.autoScrollSwitch && self.autoScrollSwitch.on != scroll) self.autoScrollSwitch.on = scroll;
+
+        [userDefaults setBool:scroll forKey:@"autoScrollDefault"];
+        [userDefaults synchronize];
     }
 }
 
@@ -169,9 +163,14 @@
     }
     
     MSSysLogEntry* entry = [self.logReceiver.logEntries objectAtIndex:indexPath.row];
-    cell.textLabel.text = [NSString stringWithFormat:@"%@ [%@] [%@]", [entry faciltyName], [entry severityName], entry.tag];
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"[%@] : %@", entry.pid, entry.msg];
     
+    if(isPad()){
+        cell.textLabel.text = [NSString stringWithFormat:@"%@ [%@] [%@]", [entry faciltyName], [entry severityName], entry.tag];
+        cell.detailTextLabel.text = [NSString stringWithFormat:@"[%@] : %@", entry.pid, entry.msg];
+    }else{
+        cell.textLabel.text = [NSString stringWithFormat:@"%@", [entry faciltyName]];
+        cell.detailTextLabel.text = [NSString stringWithFormat:@"%@", entry.msg];
+    }
     NSString *imagePath = [[NSBundle mainBundle] pathForResource:@"black" ofType:@"png"];
     if(entry.severity <= kCRITICAL){
         imagePath = [[NSBundle mainBundle] pathForResource:@"red" ofType:@"png"];
@@ -203,14 +202,18 @@
 {
     if([[segue identifier]isEqualToString:@"showSettings"]){
         MSSettingsTableViewController* dest = [segue destinationViewController];
+        if([dest view]){
         dest.portCounter.value = self.logReceiver.port;
-        dest.autoScrollSwitch.on = self.autoScrollSwitch.on;
+        dest.autoScrollSwitch.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"autoScrollDefault"];
         dest.severityCounter.value = self.logReceiver.severity;
         dest.delegate = self;
+        }
     }else if([[segue identifier]isEqualToString:@"showEntry"]){
         MSSyslogEntryViewController* dest = [segue destinationViewController];
-        dest.entry = [self.logReceiver.logEntries objectAtIndex:[self.syslogTableView indexPathForSelectedRow].row];
-        [self.syslogTableView deselectRowAtIndexPath:[self.syslogTableView indexPathForSelectedRow] animated:NO];
+        if([dest view]){
+            dest.entry = [self.logReceiver.logEntries objectAtIndex:[self.syslogTableView indexPathForSelectedRow].row];
+            [self.syslogTableView deselectRowAtIndexPath:[self.syslogTableView indexPathForSelectedRow] animated:NO];
+        }
     }
 }
 
@@ -239,7 +242,10 @@
         
         [self.toolbarMessage setTitle:@"Error connecting"];
     }else{
-        NSString* msg = [NSString stringWithFormat:@"Listening on %@:%u", [MSNetworkHelper GetWifiIpAddress], self.logReceiver.port];
+        NSString* msg = [NSString stringWithFormat:@"%@:%u", [MSNetworkHelper GetWifiIpAddress], self.logReceiver.port];
+        if(isPad()){
+            msg = [NSString stringWithFormat:@"Listening on %@:%u", [MSNetworkHelper GetWifiIpAddress], self.logReceiver.port];
+        }
         [self.toolbarMessage setTitle:msg];
     }
 }

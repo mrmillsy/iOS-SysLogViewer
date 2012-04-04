@@ -74,7 +74,11 @@
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+    if (!isPad()) {
+        return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
+    } else {
+        return YES;
+    }
 }
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -88,6 +92,7 @@
 - (IBAction)portNumberValueChanged:(id)sender {
     self.portLabel.text = [NSString stringWithFormat:@"%g", self.portCounter.value];
 }
+
 - (IBAction)severityValueChanged:(id)sender {
     
     MSSysLogEntry* entry = [[MSSysLogEntry alloc]init];
