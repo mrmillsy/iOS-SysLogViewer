@@ -62,6 +62,8 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <toolbarItems>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="M4F-nM-kmu"/>
+                        <barButtonItem enabled="NO" style="plain" id="Aj9-xF-y1i"/>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="HHw-af-y5B"/>
                         <barButtonItem title="Clear" id="Ohh-bd-uOn">
                             <connections>
@@ -94,6 +96,7 @@
                     <connections>
                         <outlet property="autoScrollSwitch" destination="FbO-Pj-Bab" id="2ha-oJ-QyG"/>
                         <outlet property="syslogTableView" destination="ZJA-Jc-ADd" id="vYA-dh-Bsk"/>
+                        <outlet property="toolbarMessage" destination="Aj9-xF-y1i" id="AWc-Yw-iox"/>
                     </connections>
                 </viewController>
             </objects>
@@ -580,6 +583,7 @@
             <relationships>
                 <relationship kind="outlet" name="autoScrollSwitch" candidateClass="UISwitch"/>
                 <relationship kind="outlet" name="syslogTableView" candidateClass="UITableView"/>
+                <relationship kind="outlet" name="toolbarMessage" candidateClass="UIBarButtonItem"/>
             </relationships>
         </class>
     </classes>

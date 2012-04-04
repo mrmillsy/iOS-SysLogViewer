@@ -12,5 +12,6 @@
 @interface MSViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, MSSettingsTableViewControllerDataSource, UIAlertViewDelegate>
 @property (retain, nonatomic) IBOutlet UITableView *syslogTableView;
 @property (retain, nonatomic) IBOutlet UISwitch *autoScrollSwitch;
+@property (retain, nonatomic) IBOutlet UIBarButtonItem *toolbarMessage;
 
 @end

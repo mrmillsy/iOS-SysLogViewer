@@ -10,6 +10,7 @@
 #import "MSSysLogReceiver.h"
 #import "MSSysLogEntry.h"
 #import "MSSyslogEntryViewController.h"
+#import "MSNetworkHelper.h"
 
 @interface MSViewController()
 
@@ -20,6 +21,7 @@
 @implementation MSViewController
 @synthesize syslogTableView = _syslogTableView;
 @synthesize autoScrollSwitch = _autoScrollSwitch;
+@synthesize toolbarMessage = _toolbarMessage;
 
 @synthesize logReceiver = _logReceiver;
 
@@ -40,13 +42,14 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+
     //register for background notifications
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(appStateChange:) name:UIApplicationDidEnterBackgroundNotification object:nil];
     //register for foreground notifications
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(appStateChange:) name:UIApplicationWillEnterForegroundNotification object:nil];
     
     [self start];
+
 }
 
 -(void)appStateChange:(NSNotification*)notification
@@ -71,6 +74,7 @@
     [self setSyslogTableView:nil];
     [self setAutoScrollSwitch:nil];
     [self setAutoScrollSwitch:nil];
+    [self setToolbarMessage:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -232,6 +236,11 @@
         //show Alert to user
         UIAlertView* alert = [[[UIAlertView alloc]initWithTitle:@"Error" message:@"Could not bind to port - check Wifi connection" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil] autorelease];
         [alert show];
+        
+        [self.toolbarMessage setTitle:@"Error connecting"];
+    }else{
+        NSString* msg = [NSString stringWithFormat:@"Listening on %@:%u", [MSNetworkHelper GetWifiIpAddress], self.logReceiver.port];
+        [self.toolbarMessage setTitle:msg];
     }
 }
 
@@ -249,6 +258,7 @@
     [_syslogTableView release];
     [_autoScrollSwitch release];
     [_autoScrollSwitch release];
+    [_toolbarMessage release];
     [super dealloc];
 }
 @end
