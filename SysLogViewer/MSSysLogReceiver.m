@@ -52,6 +52,12 @@ static UInt16 defaultPort = 5122;
 
 -(BOOL)startListening
 {
+    //check if still listening first
+    if(self.UdpSocket1)
+    {
+        [self stopListening];
+    }
+    
     NSLog(@"Creating UDP socket");
     self.UdpSocket1 = [[[AsyncUdpSocket alloc] initWithDelegate:self]autorelease];
     if (![self.UdpSocket1 bindToPort:self.port error:nil])
@@ -69,6 +75,7 @@ static UInt16 defaultPort = 5122;
     if(![self.UdpSocket1 isClosed])
     {
         [self.UdpSocket1 close];
+        self.UdpSocket1 = nil;
     }
 }
 

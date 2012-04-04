@@ -41,9 +41,26 @@
 {
     [super viewDidLoad];
     
-    NSUserDefaults* userDefaults = [NSUserDefaults standardUserDefaults];    
+    //register for background notifications
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(appStateChange:) name:UIApplicationDidEnterBackgroundNotification object:nil];
+    //register for foreground notifications
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(appStateChange:) name:UIApplicationWillEnterForegroundNotification object:nil];
     
-    [self startWithPort:[userDefaults integerForKey:@"defaultPortNumber"]];
+    [self start];
+}
+
+-(void)appStateChange:(NSNotification*)notification
+{
+    if([[notification name]isEqualToString:UIApplicationDidEnterBackgroundNotification]){
+        //stop connections
+        [[NSNotificationCenter defaultCenter]removeObserver:self name:@"SysLogMessage" object:self.logReceiver];
+        [self.logReceiver stopListening];
+        NSLog(@"Network connections closed");
+    }else if([[notification name]isEqualToString:UIApplicationWillEnterForegroundNotification]){
+        //restart connection
+        [self start];
+        NSLog(@"Network connections opened");
+    }
 }
 
 - (void)viewDidUnload
@@ -124,15 +141,15 @@
         [userDefaults synchronize];
         
         //stop receiving notifications
-        [[NSNotificationCenter defaultCenter]removeObserver:self];
+        [[NSNotificationCenter defaultCenter]removeObserver:self name:@"SysLogMessage" object:self.logReceiver];
         
         //close the old one
         if(self.logReceiver){
             [self.logReceiver stopListening];
-        }   
+        }
         
         //start listening    
-        [self startWithPort:portNumber];
+        [self start];
     }
 }
 
@@ -193,12 +210,17 @@
     }
 }
 
--(void)startWithPort:(int)portNumber
+-(void)start
 {
     NSUserDefaults* userDefaults = [NSUserDefaults standardUserDefaults];    
     
-    //restart the listener    
-    self.logReceiver = [[[MSSysLogReceiver alloc]initWithPort:portNumber]autorelease];
+    int portNumber = [userDefaults integerForKey:@"defaultPortNumber"];
+    
+    if(!self.logReceiver){
+        self.logReceiver = [[[MSSysLogReceiver alloc]initWithPort:portNumber]autorelease];
+    }
+    
+    self.logReceiver.port = portNumber;
     self.logReceiver.severity = [userDefaults integerForKey:@"defaultSeverityLevel"];    
     self.autoScrollSwitch.on = [userDefaults boolForKey:@"autoScrollDefault"];    
     
