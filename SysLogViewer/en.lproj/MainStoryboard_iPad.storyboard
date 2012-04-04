@@ -77,7 +77,7 @@
                                 </segue>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Auto Scroll" style="plain" id="oT0-3E-vJA">
+                        <barButtonItem key="rightBarButtonItem" title="Auto Scroll" id="oT0-3E-vJA">
                             <switch key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" id="FbO-Pj-Bab">
                                 <rect key="frame" x="682" y="8" width="79" height="27"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>

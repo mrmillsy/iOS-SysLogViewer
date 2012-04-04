@@ -110,7 +110,7 @@ static UInt16 defaultPort = 5122;
     NSPredicate* filterPred = [NSPredicate predicateWithFormat:@"severity <= %u", self.severity];
     NSMutableArray* copy = [self.internalLogEntries mutableCopy];
     [copy filterUsingPredicate:filterPred];
-    return copy; 
+    return [copy autorelease]; 
 }
 
 -(void)dealloc
