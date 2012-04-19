@@ -39,6 +39,8 @@
 		83C8A77C1501274A0098A280 /* MSViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83C8A77B1501274A0098A280 /* MSViewController.m */; };
 		83C8A783150127B80098A280 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83C8A782150127B80098A280 /* CFNetwork.framework */; };
 		83C8A7861501282C0098A280 /* AsyncUdpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 83C8A7851501282C0098A280 /* AsyncUdpSocket.m */; };
+		83DECDBA154074F900680983 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 83DECDB9154074F900680983 /* Reachability.m */; };
+		83DECDBC1540757A00680983 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83DECDBB1540757A00680983 /* SystemConfiguration.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -85,6 +87,9 @@
 		83C8A782150127B80098A280 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		83C8A7841501282C0098A280 /* AsyncUdpSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AsyncUdpSocket.h; sourceTree = "<group>"; };
 		83C8A7851501282C0098A280 /* AsyncUdpSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AsyncUdpSocket.m; sourceTree = "<group>"; };
+		83DECDB8154074F900680983 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Reachability.h; path = Reachability/Reachability.h; sourceTree = "<group>"; };
+		83DECDB9154074F900680983 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Reachability.m; path = Reachability/Reachability.m; sourceTree = "<group>"; };
+		83DECDBB1540757A00680983 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,6 +97,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				83DECDBC1540757A00680983 /* SystemConfiguration.framework in Frameworks */,
 				83C8A783150127B80098A280 /* CFNetwork.framework in Frameworks */,
 				83C8A7631501274A0098A280 /* UIKit.framework in Frameworks */,
 				83C8A7651501274A0098A280 /* Foundation.framework in Frameworks */,
@@ -179,6 +185,7 @@
 		83C8A7611501274A0098A280 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				83DECDBB1540757A00680983 /* SystemConfiguration.framework */,
 				83C8A782150127B80098A280 /* CFNetwork.framework */,
 				83C8A7621501274A0098A280 /* UIKit.framework */,
 				83C8A7641501274A0098A280 /* Foundation.framework */,
@@ -190,6 +197,7 @@
 		83C8A7681501274A0098A280 /* SysLogViewer */ = {
 			isa = PBXGroup;
 			children = (
+				83DECDB6154074C600680983 /* Reachability */,
 				8385B9F5152B2CA900155871 /* Controllers */,
 				8385B9F4152B2C9B00155871 /* Views */,
 				8385B9EB152B148400155871 /* Images */,
@@ -221,6 +229,15 @@
 				83C8A7851501282C0098A280 /* AsyncUdpSocket.m */,
 			);
 			name = UDP;
+			sourceTree = "<group>";
+		};
+		83DECDB6154074C600680983 /* Reachability */ = {
+			isa = PBXGroup;
+			children = (
+				83DECDB8154074F900680983 /* Reachability.h */,
+				83DECDB9154074F900680983 /* Reachability.m */,
+			);
+			name = Reachability;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -312,6 +329,7 @@
 				8385B9E9152AFAD300155871 /* MSSysLogEntry.m in Sources */,
 				8385B9F8152B2CCF00155871 /* MSSettingsTableViewController.m in Sources */,
 				83B7890F152B6AE300623E84 /* MSSyslogEntryViewController.m in Sources */,
+				83DECDBA154074F900680983 /* Reachability.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

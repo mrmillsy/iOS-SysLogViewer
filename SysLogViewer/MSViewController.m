@@ -14,10 +14,12 @@
 #import "MSSyslogEntryViewController.h"
 #import "MSNetworkHelper.h"
 #import "MSSettingsTableViewController.h"
+#import "Reachability.h"
 
 @interface MSViewController()
 
 @property (retain, nonatomic) MSSysLogReceiver* logReceiver;
+@property (retain, nonatomic) Reachability* wifiReach;
 
 @end
 
@@ -27,7 +29,7 @@
 @synthesize toolbarMessage = _toolbarMessage;
 
 @synthesize logReceiver = _logReceiver;
-
+@synthesize wifiReach = _wifiReach;
 
 - (void)didReceiveMemoryWarning
 {
@@ -49,22 +51,38 @@
     //register for foreground notifications
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(appStateChange:) name:UIApplicationWillEnterForegroundNotification object:nil];
     
-    [self start];
+    [[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(reachabilityChanged:) name: kReachabilityChangedNotification object: nil];  
+    
+    self.wifiReach = [[Reachability reachabilityForLocalWiFi]retain];
+    [self.wifiReach startNotifier];
+    
+    if([self.wifiReach currentReachabilityStatus] == ReachableViaWiFi){
+        [self start];
+    }
+}
 
+- (void) reachabilityChanged: (NSNotification* )note
+{
+    Reachability* curReach = [note object];
+    if([curReach isKindOfClass: [Reachability class]]){
+        if([curReach currentReachabilityStatus] == ReachableViaWiFi){
+            [self start];
+        }else{
+            [self stop];
+            [self networkLost];
+        }
+    }
+    
 }
 
 -(void)appStateChange:(NSNotification*)notification
 {
     if([[notification name]isEqualToString:UIApplicationDidEnterBackgroundNotification]){
         //stop connections
-        [[NSNotificationCenter defaultCenter]removeObserver:self name:@"SysLogMessage" object:self.logReceiver];
-        [[NSNotificationCenter defaultCenter]removeObserver:self name:@"NetworkLost" object:self.logReceiver];
-        [self.logReceiver stopListening];
-        NSLog(@"Network connections closed");
+        [self stop];
     }else if([[notification name]isEqualToString:UIApplicationWillEnterForegroundNotification]){
         //restart connection
         [self start];
-        NSLog(@"Network connections opened");
     }
 }
 
@@ -148,13 +166,7 @@
         [userDefaults synchronize];
         
         //stop receiving notifications
-        [[NSNotificationCenter defaultCenter]removeObserver:self name:@"SysLogMessage" object:self.logReceiver];
-        [[NSNotificationCenter defaultCenter]removeObserver:self name:@"NetworkLost" object:self.logReceiver];
-        
-        //close the old one
-        if(self.logReceiver){
-            [self.logReceiver stopListening];
-        }
+        [self stop];
         
         //start listening    
         [self start];
@@ -265,7 +277,7 @@
     
     //register for notifications again
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(newMessage) name:@"SysLogMessage" object:self.logReceiver];
-    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(networkLost) name:@"NetworkLost" object:self.logReceiver];
+    //[[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(networkLost) name:@"NetworkLost" object:self.logReceiver];
     
     BOOL started = [self.logReceiver startListening];
     if(!started){
@@ -280,6 +292,14 @@
             msg = [NSString stringWithFormat:@"Listening on %@:%u", [MSNetworkHelper GetWifiIpAddress], self.logReceiver.port];
         }
         [self.toolbarMessage setTitle:msg];
+    }
+}
+
+-(void)stop{
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:@"SysLogMessage" object:self.logReceiver];
+    //[[NSNotificationCenter defaultCenter]removeObserver:self name:@"NetworkLost" object:self.logReceiver];
+    if(self.logReceiver){
+        [self.logReceiver stopListening];
     }
 }
 

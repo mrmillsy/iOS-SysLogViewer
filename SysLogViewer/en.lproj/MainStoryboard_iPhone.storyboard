@@ -343,7 +343,13 @@
                             <outletCollection property="gestureRecognizers" destination="ETE-mV-3cf" appends="YES" id="NmW-zN-jDx"/>
                         </connections>
                     </tableView>
+                    <toolbarItems>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="r0i-HZ-9D0"/>
+                        <barButtonItem enabled="NO" title="&lt;- swipe ->" style="plain" id="pdV-0d-adL"/>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="oab-qv-9JX"/>
+                    </toolbarItems>
                     <navigationItem key="navigationItem" title="Syslog Entry" id="HTt-ZW-GzG"/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="faciltyLabel" destination="Ahn-i3-jfZ" id="trT-FG-W3N"/>
                         <outlet property="hostLabel" destination="wya-J6-K5S" id="D1W-bv-FAD"/>
@@ -547,43 +553,6 @@
     <resources>
         <image name="black.png" width="25" height="25"/>
     </resources>
-    <classes>
-        <class className="MSSettingsTableViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MSSettingsTableViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="autoScrollSwitch" candidateClass="UISwitch"/>
-                <relationship kind="outlet" name="ipLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="portCounter" candidateClass="UIStepper"/>
-                <relationship kind="outlet" name="portLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="severityCounter" candidateClass="UIStepper"/>
-                <relationship kind="outlet" name="severityLabel" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="MSSyslogEntryViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MSSyslogEntryViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="swipe:" candidateClass="UISwipeGestureRecognizer"/>
-                <relationship kind="outlet" name="faciltyLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="hostLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="msgLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="portLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="priorityLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="processIDLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="severityLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="syslogTable" candidateClass="UITableView"/>
-                <relationship kind="outlet" name="tagLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="timestampLabel" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="MSViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MSViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="autoScrollSwitch" candidateClass="UISwitch"/>
-                <relationship kind="outlet" name="syslogTableView" candidateClass="UITableView"/>
-                <relationship kind="outlet" name="toolbarMessage" candidateClass="UIBarButtonItem"/>
-            </relationships>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

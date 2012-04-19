@@ -511,7 +511,11 @@
                             <outletCollection property="gestureRecognizers" destination="SKW-w3-JLc" appends="YES" id="fj8-Lt-aa5"/>
                         </connections>
                     </tableView>
-                    <toolbarItems/>
+                    <toolbarItems>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="IbK-Kl-gPd"/>
+                        <barButtonItem enabled="NO" title="&lt;- swipe ->" style="plain" id="yzf-1s-QRv"/>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="geI-Jz-CSS"/>
+                    </toolbarItems>
                     <navigationItem key="navigationItem" title="Syslog Entry" id="oqd-9o-Ryo"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
