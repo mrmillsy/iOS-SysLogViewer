@@ -53,7 +53,7 @@
     
     [[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(reachabilityChanged:) name: kReachabilityChangedNotification object: nil];  
     
-    self.wifiReach = [[Reachability reachabilityForLocalWiFi]retain];
+    self.wifiReach = [[[Reachability reachabilityForLocalWiFi]retain]autorelease];
     [self.wifiReach startNotifier];
     
     if([self.wifiReach currentReachabilityStatus] == ReachableViaWiFi){
@@ -318,6 +318,7 @@
     [_autoScrollSwitch release];
     [_autoScrollSwitch release];
     [_toolbarMessage release];
+    [_wifiReach release];
     [super dealloc];
 }
 @end
