@@ -25,6 +25,7 @@
 @synthesize msgLabel = _msgLabel;
 @synthesize hostLabel = _hostLabel;
 @synthesize portLabel = _portLabel;
+@synthesize datasource = _datasource;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -49,16 +50,21 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     if(self.entry){
-        self.priorityLabel.text = [NSString stringWithFormat:@"%u", self.entry.priority];
-        self.severityLabel.text = [self.entry severityName];
-        self.faciltyLabel.text = [self.entry faciltyName];
-        self.timestampLabel.text = self.entry.timestamp;
-        self.processIDLabel.text = self.entry.pid;
-        self.tagLabel.text = self.entry.tag;
-        self.msgLabel.text = self.entry.msg;
-        self.hostLabel.text = self.entry.host;
-        self.portLabel.text = [NSString stringWithFormat:@"%u", self.entry.port];
+        [self displayEntry];
     }
+}
+
+-(void)displayEntry
+{
+    self.priorityLabel.text = [NSString stringWithFormat:@"%u", self.entry.priority];
+    self.severityLabel.text = [self.entry severityName];
+    self.faciltyLabel.text = [self.entry faciltyName];
+    self.timestampLabel.text = self.entry.timestamp;
+    self.processIDLabel.text = self.entry.pid;
+    self.tagLabel.text = self.entry.tag;
+    self.msgLabel.text = self.entry.msg;
+    self.hostLabel.text = self.entry.host;
+    self.portLabel.text = [NSString stringWithFormat:@"%u", self.entry.port];
 }
 
 - (void)viewDidUnload
@@ -87,6 +93,23 @@
     }
 
 }
+- (IBAction)swipe:(UISwipeGestureRecognizer*)sender {
+    if(self.datasource){
+        MSSysLogEntry* entry = nil;
+        
+        if(sender.direction == UISwipeGestureRecognizerDirectionRight){
+            entry = [self.datasource previousEntry];
+        }else if(sender.direction == UISwipeGestureRecognizerDirectionLeft){
+            entry = [self.datasource nextEntry];
+        }
+        
+        if(entry){
+            self.entry = entry;
+            [self displayEntry];
+        }
+    }
+}
+
 
 - (void)dealloc {
     [_syslogTable release];
@@ -101,4 +124,5 @@
     [_portLabel release];
     [super dealloc];
 }
+
 @end

@@ -9,6 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "MSSysLogEntry.h"
 
+@protocol MSSyslogEntryDatasource
+-(MSSysLogEntry*)previousEntry;
+-(MSSysLogEntry*)nextEntry;
+@end
+
 @interface MSSyslogEntryViewController : UITableViewController
 
 @property (retain, nonatomic) IBOutlet UITableView *syslogTable;
@@ -22,5 +27,10 @@
 @property (retain, nonatomic) IBOutlet UILabel *msgLabel;
 @property (retain, nonatomic) IBOutlet UILabel *hostLabel;
 @property (retain, nonatomic) IBOutlet UILabel *portLabel;
+
+//delegate
+@property (retain, nonatomic) id<MSSyslogEntryDatasource> datasource;
+
+- (IBAction)swipe:(UISwipeGestureRecognizer *)sender;
 
 @end

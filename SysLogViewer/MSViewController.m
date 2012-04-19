@@ -58,6 +58,7 @@
     if([[notification name]isEqualToString:UIApplicationDidEnterBackgroundNotification]){
         //stop connections
         [[NSNotificationCenter defaultCenter]removeObserver:self name:@"SysLogMessage" object:self.logReceiver];
+        [[NSNotificationCenter defaultCenter]removeObserver:self name:@"NetworkLost" object:self.logReceiver];
         [self.logReceiver stopListening];
         NSLog(@"Network connections closed");
     }else if([[notification name]isEqualToString:UIApplicationWillEnterForegroundNotification]){
@@ -101,6 +102,14 @@
     }
 }
 
+-(void)networkLost
+{
+    UIAlertView* alert = [[[UIAlertView alloc]initWithTitle:@"Error" message:@"Network connection lost - check Wifi connection" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil] autorelease];
+    [alert show];
+    
+    [self.toolbarMessage setTitle:@"Wifi Error"];
+}
+
 -(void)updateSeverity:(Severity)sev
 {
     if(self.logReceiver.severity != sev){
@@ -140,6 +149,7 @@
         
         //stop receiving notifications
         [[NSNotificationCenter defaultCenter]removeObserver:self name:@"SysLogMessage" object:self.logReceiver];
+        [[NSNotificationCenter defaultCenter]removeObserver:self name:@"NetworkLost" object:self.logReceiver];
         
         //close the old one
         if(self.logReceiver){
@@ -168,7 +178,7 @@
         cell.textLabel.text = [NSString stringWithFormat:@"%@ [%@] [%@]", [entry faciltyName], [entry severityName], entry.tag];
         cell.detailTextLabel.text = [NSString stringWithFormat:@"[%@] : %@", entry.pid, entry.msg];
     }else{
-        cell.textLabel.text = [NSString stringWithFormat:@"%@", [entry faciltyName]];
+        cell.textLabel.text = [NSString stringWithFormat:@"%@", [entry shortFaciltyName]];
         cell.detailTextLabel.text = [NSString stringWithFormat:@"%@", entry.msg];
     }
     NSString *imagePath = [[NSBundle mainBundle] pathForResource:@"black" ofType:@"png"];
@@ -212,10 +222,32 @@
         MSSyslogEntryViewController* dest = [segue destinationViewController];
         if([dest view]){
             dest.entry = [self.logReceiver.logEntries objectAtIndex:[self.syslogTableView indexPathForSelectedRow].row];
-            [self.syslogTableView deselectRowAtIndexPath:[self.syslogTableView indexPathForSelectedRow] animated:NO];
+            dest.datasource = self;
+            //[self.syslogTableView deselectRowAtIndexPath:[self.syslogTableView indexPathForSelectedRow] animated:NO];
         }
     }
 }
+
+-(MSSysLogEntry*)previousEntry{
+    int selected = [self.syslogTableView indexPathForSelectedRow].row;
+    if(selected > 0){
+        [self.syslogTableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:selected-1 inSection:0] animated:NO scrollPosition:UITableViewScrollPositionNone];
+        return [self.logReceiver.logEntries objectAtIndex:[self.syslogTableView indexPathForSelectedRow].row];
+    }
+    
+    return nil;
+}
+
+-(MSSysLogEntry*)nextEntry{
+    int selected = [self.syslogTableView indexPathForSelectedRow].row;
+    if(selected < self.logReceiver.logEntries.count-1){
+        [self.syslogTableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:selected+1 inSection:0] animated:NO scrollPosition:UITableViewScrollPositionNone];
+        return [self.logReceiver.logEntries objectAtIndex:[self.syslogTableView indexPathForSelectedRow].row];
+    }
+    
+    return nil;
+}
+
 
 -(void)start
 {
@@ -233,7 +265,8 @@
     
     //register for notifications again
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(newMessage) name:@"SysLogMessage" object:self.logReceiver];
-
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(networkLost) name:@"NetworkLost" object:self.logReceiver];
+    
     BOOL started = [self.logReceiver startListening];
     if(!started){
         //show Alert to user

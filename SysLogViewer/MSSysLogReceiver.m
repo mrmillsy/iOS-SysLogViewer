@@ -58,11 +58,14 @@ static UInt16 defaultPort = 5122;
         [self stopListening];
     }
     
-    NSLog(@"Creating UDP socket");
+    NSString* wifiAddress = [MSNetworkHelper GetWifiIpAddress];
+    if(!wifiAddress)
+        return NO;
+    
     self.UdpSocket1 = [[[AsyncUdpSocket alloc] initWithDelegate:self]autorelease];
-    if (![self.UdpSocket1 bindToPort:self.port error:nil])
+    //if (![self.UdpSocket1 bindToPort:self.port error:nil])
+    if (![self.UdpSocket1 bindToAddress:wifiAddress port:self.port error:nil])
     {
-        NSLog(@"Bind error");
         return NO;
     }
     [self.UdpSocket1 receiveWithTimeout:-1 tag:1];
@@ -74,6 +77,7 @@ static UInt16 defaultPort = 5122;
 {
     if(![self.UdpSocket1 isClosed])
     {
+        self.UdpSocket1.delegate = nil;
         [self.UdpSocket1 close];
         self.UdpSocket1 = nil;
     }
@@ -96,6 +100,11 @@ static UInt16 defaultPort = 5122;
     
 	[self.UdpSocket1 receiveWithTimeout:-1 tag:1];			//Setup to receive next UDP packet
 	return YES;			//Signal that we didn't ignore the packet.
+}
+
+- (void)onUdpSocketDidClose:(AsyncUdpSocket *)sock
+{
+    [[NSNotificationCenter defaultCenter]postNotificationName:@"NetworkLost" object:self];
 }
 
 -(void)clearEntries

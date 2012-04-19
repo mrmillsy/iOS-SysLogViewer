@@ -34,7 +34,7 @@
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 </label>
-                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="VJ7-bw-U67">
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="right" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="VJ7-bw-U67">
                                                     <rect key="frame" x="246" y="11" width="44" height="21"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -92,10 +92,11 @@
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="boE-mG-1wo" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController id="zAa-wx-KNF" customClass="MSSyslogEntryViewController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="zSQ-Y0-FCZ">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" alwaysBounceVertical="YES" dataMode="static" style="grouped" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="zSQ-Y0-FCZ">
                         <rect key="frame" x="0.0" y="64" width="320" height="372"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <gestureRecognizers/>
                         <sections>
                             <tableViewSection headerTitle="Header" id="r5K-EY-02n">
                                 <cells>
@@ -182,7 +183,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Timestamp" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Tx4-Bc-CJt">
-                                                    <rect key="frame" x="10" y="11" width="91" height="21"/>
+                                                    <rect key="frame" x="10" y="11" width="90" height="21"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -207,7 +208,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Process ID" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="q9e-cU-ZBp">
-                                                    <rect key="frame" x="10" y="11" width="89" height="21"/>
+                                                    <rect key="frame" x="10" y="11" width="88" height="21"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -338,6 +339,8 @@
                         <connections>
                             <outlet property="dataSource" destination="zAa-wx-KNF" id="dLS-EC-m1P"/>
                             <outlet property="delegate" destination="zAa-wx-KNF" id="Hrt-8p-ktf"/>
+                            <outletCollection property="gestureRecognizers" destination="rs4-ab-UgF" appends="YES" id="r8x-XZ-Rdt"/>
+                            <outletCollection property="gestureRecognizers" destination="ETE-mV-3cf" appends="YES" id="NmW-zN-jDx"/>
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Syslog Entry" id="HTt-ZW-GzG"/>
@@ -353,6 +356,16 @@
                         <outlet property="timestampLabel" destination="IMd-L3-oRM" id="H8N-0K-H7M"/>
                     </connections>
                 </tableViewController>
+                <swipeGestureRecognizer direction="left" id="rs4-ab-UgF">
+                    <connections>
+                        <action selector="swipe:" destination="zAa-wx-KNF" id="cLr-R4-Iiv"/>
+                    </connections>
+                </swipeGestureRecognizer>
+                <swipeGestureRecognizer direction="right" id="ETE-mV-3cf">
+                    <connections>
+                        <action selector="swipe:" destination="zAa-wx-KNF" id="aKo-dO-shy"/>
+                    </connections>
+                </swipeGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1120" y="528"/>
         </scene>
@@ -549,6 +562,7 @@
         <class className="MSSyslogEntryViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/MSSyslogEntryViewController.h"/>
             <relationships>
+                <relationship kind="action" name="swipe:" candidateClass="UISwipeGestureRecognizer"/>
                 <relationship kind="outlet" name="faciltyLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="hostLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="msgLabel" candidateClass="UILabel"/>

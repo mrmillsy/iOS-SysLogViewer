@@ -260,10 +260,11 @@
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dKF-kE-Cyy" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController id="X2k-HT-IyV" customClass="MSSyslogEntryViewController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="singleLineEtched" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="7vB-i2-Bwu">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="singleLineEtched" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="7vB-i2-Bwu">
                         <rect key="frame" x="0.0" y="64" width="768" height="916"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <gestureRecognizers/>
                         <sections>
                             <tableViewSection headerTitle="Header" id="DFc-LL-R4t">
                                 <cells>
@@ -375,7 +376,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Process ID" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="967-cG-K9E">
-                                                    <rect key="frame" x="10" y="11" width="90" height="21"/>
+                                                    <rect key="frame" x="10" y="11" width="88" height="21"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -404,7 +405,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Tag" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="9L8-qs-vBq">
-                                                    <rect key="frame" x="10" y="11" width="54" height="21"/>
+                                                    <rect key="frame" x="10" y="11" width="31" height="21"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -458,7 +459,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Host" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="5w8-ig-ZeC">
-                                                    <rect key="frame" x="10" y="11" width="39" height="21"/>
+                                                    <rect key="frame" x="10" y="11" width="38" height="21"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -483,7 +484,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Port" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="9Ey-aP-i58">
-                                                    <rect key="frame" x="10" y="11" width="72" height="21"/>
+                                                    <rect key="frame" x="10" y="11" width="34" height="21"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -506,9 +507,13 @@
                         <connections>
                             <outlet property="dataSource" destination="X2k-HT-IyV" id="kLn-x3-C1M"/>
                             <outlet property="delegate" destination="X2k-HT-IyV" id="AdK-U0-W12"/>
+                            <outletCollection property="gestureRecognizers" destination="6n8-5y-eoa" appends="YES" id="jvb-Vh-ErC"/>
+                            <outletCollection property="gestureRecognizers" destination="SKW-w3-JLc" appends="YES" id="fj8-Lt-aa5"/>
                         </connections>
                     </tableView>
+                    <toolbarItems/>
                     <navigationItem key="navigationItem" title="Syslog Entry" id="oqd-9o-Ryo"/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="faciltyLabel" destination="tMY-c3-eYM" id="o6I-Lh-wdV"/>
                         <outlet property="hostLabel" destination="5xW-ba-XS3" id="P4a-9e-VYs"/>
@@ -522,6 +527,16 @@
                         <outlet property="timestampLabel" destination="dya-Xr-XoP" id="y1c-LI-wJf"/>
                     </connections>
                 </tableViewController>
+                <swipeGestureRecognizer direction="left" id="6n8-5y-eoa">
+                    <connections>
+                        <action selector="swipe:" destination="X2k-HT-IyV" id="Esr-Xv-chO"/>
+                    </connections>
+                </swipeGestureRecognizer>
+                <swipeGestureRecognizer direction="right" id="SKW-w3-JLc">
+                    <connections>
+                        <action selector="swipe:" destination="X2k-HT-IyV" id="NA0-0P-Qdm"/>
+                    </connections>
+                </swipeGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="2347" y="661"/>
         </scene>
@@ -566,6 +581,7 @@
         <class className="MSSyslogEntryViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/MSSyslogEntryViewController.h"/>
             <relationships>
+                <relationship kind="action" name="swipe:" candidateClass="UISwipeGestureRecognizer"/>
                 <relationship kind="outlet" name="faciltyLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="hostLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="msgLabel" candidateClass="UILabel"/>

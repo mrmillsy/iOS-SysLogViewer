@@ -142,5 +142,86 @@ switch (self.facility) {
 }
 }
 
+-(NSString*)shortFaciltyName
+{
+    switch (self.facility) {
+        case kKERN:
+            return @"Kernal";
+            break;
+        case kUSER:
+            return @"User";
+            break;
+        case kMAIL:
+            return @"Mail";
+            break;
+        case kDAEMON:
+            return @"System";
+            break;
+        case kAUTH:
+            return @"Auth";
+            break;
+        case kSYSLOG:
+            return @"Syslog";
+            break;
+        case kLPR:
+            return @"Line";
+            break;
+        case kNEWS:
+            return @"Network";
+            break;
+        case kUUCP:
+            return @"UUCP";
+            break;
+        case kCRON:
+            return @"Cron";
+            break;
+        case kAUTHPRIV:
+            return @"Auth";
+            break;
+        case kFTP:
+            return @"FTP";
+            break;
+        case kNTP:
+            return @"NTP";
+            break;
+        case kLOGAUDIT:
+            return @"Log";
+            break;
+        case kLOGALERT:
+            return @"Log";
+            break;
+        case kCLOCK:
+            return @"Clock";
+            break;
+        case kLOCAL0:
+            return @"Local0";
+            break;
+        case kLOCAL1:
+            return @"Local1";
+            break;
+        case kLOCAL2:
+            return @"Local2";
+            break;
+        case kLOCAL3:
+            return @"Local3";
+            break;
+        case kLOCAL4:
+            return @"Local4";
+            break;
+        case kLOCAL5:
+            return @"Local5";
+            break;
+        case kLOCAL6:
+            return @"Local6";
+            break;
+        case kLOCAL7:
+            return @"Local7";
+            break;
+        default:
+            return nil;
+            break;
+    }
+}
+
 
 @end

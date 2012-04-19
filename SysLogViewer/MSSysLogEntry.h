@@ -63,5 +63,6 @@ typedef enum {
 
 -(NSString*)severityName;
 -(NSString*)faciltyName;
+-(NSString*)shortFaciltyName;
 
 @end
