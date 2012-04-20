@@ -5,6 +5,9 @@ This application is an app that is freely available in the Apple App Store.  It 
 
 Messages are displayed in a table view, which can be filtered to show specific log level messages (i.e. Critical or higher).  
 
+![alt iPadExample](https://github.com/mrmillsy/iOS-SysLogViewer/blob/master/ImageSrc/iOS%20Simulator%20Screen%20shot%2019%20Apr%202012%2018.29.42.png?raw=true)
+
+![alt iPhoneExample](https://github.com/mrmillsy/iOS-SysLogViewer/blob/master/ImageSrc/iOS%20Simulator%20Screen%20shot%2019%20Apr%202012%2018.35.00.png?raw=true)
 ## Why ##
 
 This was a useful application which people were charing for in the App Store and I thought it would be interesting to see how quickly I could throw something together to do this.  Given that I knew nothing of the syslog message format beforehand, it probably took me less than 10 hours to build the whole app - oh and this is also my first iOS app as well.
