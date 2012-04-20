@@ -20,6 +20,7 @@
 
 @property (retain, nonatomic) MSSysLogReceiver* logReceiver;
 @property (retain, nonatomic) Reachability* wifiReach;
+@property (assign, nonatomic) int selectedIndex;
 
 @end
 
@@ -30,6 +31,7 @@
 
 @synthesize logReceiver = _logReceiver;
 @synthesize wifiReach = _wifiReach;
+@synthesize selectedIndex = _selectedIndex;
 
 - (void)didReceiveMemoryWarning
 {
@@ -58,6 +60,8 @@
     
     if([self.wifiReach currentReachabilityStatus] == ReachableViaWiFi){
         [self start];
+    }else{
+        [self networkLost];
     }
 }
 
@@ -233,28 +237,27 @@
     }else if([[segue identifier]isEqualToString:@"showEntry"]){
         MSSyslogEntryViewController* dest = [segue destinationViewController];
         if([dest view]){
-            dest.entry = [self.logReceiver.logEntries objectAtIndex:[self.syslogTableView indexPathForSelectedRow].row];
+            self.selectedIndex = [self.syslogTableView indexPathForSelectedRow].row;
+            dest.entry = [self.logReceiver.logEntries objectAtIndex:self.selectedIndex];
             dest.datasource = self;
-            //[self.syslogTableView deselectRowAtIndexPath:[self.syslogTableView indexPathForSelectedRow] animated:NO];
+            [self.syslogTableView deselectRowAtIndexPath:[self.syslogTableView indexPathForSelectedRow] animated:NO];
         }
     }
 }
 
 -(MSSysLogEntry*)previousEntry{
-    int selected = [self.syslogTableView indexPathForSelectedRow].row;
-    if(selected > 0){
-        [self.syslogTableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:selected-1 inSection:0] animated:NO scrollPosition:UITableViewScrollPositionNone];
-        return [self.logReceiver.logEntries objectAtIndex:[self.syslogTableView indexPathForSelectedRow].row];
+    if(self.selectedIndex > 0){
+        self.selectedIndex -= 1;
+        return [self.logReceiver.logEntries objectAtIndex:self.selectedIndex];
     }
     
     return nil;
 }
 
 -(MSSysLogEntry*)nextEntry{
-    int selected = [self.syslogTableView indexPathForSelectedRow].row;
-    if(selected < self.logReceiver.logEntries.count-1){
-        [self.syslogTableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:selected+1 inSection:0] animated:NO scrollPosition:UITableViewScrollPositionNone];
-        return [self.logReceiver.logEntries objectAtIndex:[self.syslogTableView indexPathForSelectedRow].row];
+    if(self.selectedIndex < self.logReceiver.logEntries.count-1){
+        self.selectedIndex += 1;
+        return [self.logReceiver.logEntries objectAtIndex:self.selectedIndex];
     }
     
     return nil;
